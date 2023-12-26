@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Shopping Cart</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 40px;
+            background-color: #f8f9fa;
+            color: #495057;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+            font-size: 18px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        button {
+            display: block;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            width: 90%;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        select {
+            padding: 20px;
+            font-size: 20px;
+            width: 90%;
+            margin-top: 30px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            color: #555;
+            font-size: 20px;
+        }
+
+        .total-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ffc107;
+            color: #000;
+            border-radius: 8px;
+            font-size: 24px;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Modern Shopping Cart</h1>
+
+    <form method="post" action="{{ url_for('shopping_cart') }}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Total Quantity</th>
+                    <th>Product Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in shopping_cart %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>{{ item[1] }}</td>
+                    <td>${{ item[2] }}</td>
+                    <td>${{ item[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <label for="payment_method">Payment Method:</label>
+        <select id="payment_method" name="payment_method">
+            <option value="Credit Card">Credit Card</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="Online Transfer">Online Transfer</option>
+            <option value="PayPal">PayPal</option>
+        </select>
+
+        <div class="total-container">
+            <span>Total:</span>
+            <span>${{ total }}</span>
+        </div>
+
+        <button type="submit">Proceed to Checkout</button>
+    </form>
+</body>
+
+</html>

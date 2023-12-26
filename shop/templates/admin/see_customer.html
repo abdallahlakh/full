@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ customer.first_name }} {{ customer.last_name }} Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .customer-info {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .customer-details label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+
+        .customer-details p {
+            font-size: 16px;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>{{ customer.first_name }} {{ customer.last_name }} Details</h1>
+    </header>
+
+    <main>
+        {% if customer %}
+            <div class="customer-info">
+                <h2>Customer Information</h2>
+                <label for="email">Email: {{ customer_form.email.data }}</label>
+                <p><label>First Name:</label> {{ customer_form.first_name.data }}</p>
+                <p><label>Last Name:</label> {{ customer_form.last_name.data }}</p>
+                <p><label>Registration Date:</label> {{ customer_form.registration_date.data }}</p>
+                <p><label>Last Login:</label> {{ customer_form.last_login.data }}</p>
+                <p><label>Active:</label> {{ "Yes" if customer_form.is_active.data else "No" }}</p>
+                          
+                </div>
+        {% else %}
+            <p>Customer not found.</p>
+        {% endif %}
+    </main>
+
+</body>
+</html>

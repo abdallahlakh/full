@@ -1,0 +1,105 @@
+<!-- customer.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Customer Page</title>
+
+  <!-- Vue.js script (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <style>
+    /* Set margin and padding to 0 for the body and html elements */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    /* Set the container to occupy the entire screen */
+    #app {
+      height: 100%;
+    }
+
+    /* Add your CSS styling here */
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links button {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 20px;
+    }
+
+    .nav-links button:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #333;
+      display: none;
+      flex-direction: column;
+      width: 150px;
+      z-index: 1;
+    }
+
+    .dropdown button {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
+      border: none;
+      background: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .dropdown button:hover {
+      background-color: #555;
+    }
+
+    .dropdown-wrapper:hover .dropdown {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Include mainnavbar.html content using Jinja2 syntax -->
+    {% include 'customer/toptopnavbar.html' %}
+    {% include 'customer/topnavbar.html' %}
+    {% set is_login= is_login %}
+    {% include 'customer/mainnavbar.html' %}
+    {% include 'customer/imagenavbar.html' %}
+    {% set productGalleryData = categories %}
+    {% include 'customer/productgallery.html' %}
+  </div>
+</body>
+
+</html>

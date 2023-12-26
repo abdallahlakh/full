@@ -1,0 +1,341 @@
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-panel {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    color: #fff;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow: auto;
+}
+
+/* ... rest of your CSS ... */
+
+
+/* Edit button style */
+.icon-button.edit {
+    background-color: #ffc107; /* Yellow */
+    color: #fff;
+}
+
+/* Delete button style */
+.icon-button.delete {
+    background-color: #dc3545; /* Red */
+    color: #fff;
+}
+
+/* See Details button style */
+.icon-button.details {
+    background-color: #007bff; /* Blue */
+    color: #fff;
+}
+
+.icon-button {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.icon-button:hover {
+    filter: brightness(85%); /* Slightly reduce brightness on hover for visual feedback */
+}
+
+.icon-button i {
+    font-size: 16px;
+    margin-right: 5px;
+    color: #fff;
+}
+/* Style for the tables in the Dashboard view */
+
+.view table.recent-orders {
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+    font-size: 14px; /* Adjust the font size as needed */
+}
+
+.view table.recent-orders tbody {
+    max-height: 40vh; /* Adjust the percentage as needed */
+    overflow-y: auto; /* Add vertical scrolling when needed */
+}
+
+.view table.recent-orders th,
+.view table.recent-orders td {
+    border: 1px solid #dee2e6;
+    padding: 6px; /* Adjust the padding as needed */
+    text-align: left;
+}
+.view table.recent-customers {
+    max-width: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    font-size: 14px; /* Adjust the font size as needed */
+}
+
+.view table.recent-customers tbody {
+    max-height: 40vh; /* Adjust the percentage as needed */
+    overflow-y: auto; /* Add vertical scrolling when needed */
+}
+
+.view table.recent-customers th,
+.view table.recent-customers td {
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.view table.recent-customers th,
+.view table.recent-customers td {
+    border: 1px solid #dee2e6;
+    
+    text-align: left;
+}
+
+.view table.recent-customers th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.view table.recent-customers tbody tr:hover {
+    background-color: #f5f5f5;
+}
+.view table.recent-orders th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.view table.recent-orders tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Additional styles for layout */
+.dashboard-tables {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.dashboard-tables .recent-orders {
+    flex: 1; /* Take up remaining space on the right */
+}
+
+/* Rest of your CSS... */
+
+
+.view table {
+    max-width: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.view tbody {
+    max-height: 70vh; /* Adjust the percentage as needed */
+    overflow-y: auto; /* Add vertical scrolling when needed */
+}
+/* Rest of your CSS... */
+
+
+.view th, .view td {
+    border: 1px solid #dee2e6;
+    padding: 12px;
+    text-align: left;
+}
+
+.view th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.view tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+
+.view tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Style for the product form */
+.view form {
+    margin-top: 20px;
+}
+
+.view form div {
+    margin-bottom: 10px;
+}
+
+.view form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.view form input[type="text"],
+.view form input[type="number"],
+.view form textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.view form textarea {
+    resize: vertical;
+}
+
+.view form button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ... (previous styles) ... */
+
+
+
+
+.admin-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-info img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-info p {
+    margin-top: 10px;
+    color: #fff;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 15px;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+
+
+
+
+
+
+
+
+.search-view {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    z-index: 1000;
+    transition: top 0.3s ease-in-out; /* Add transition for smooth animation */
+}
+
+.search-view.sticky {
+    top: 0;
+}
+
+.search-view input {
+    width: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-view button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.search-view button:hover {
+    background-color: #0056b3;
+}
+.view .add-product-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.view .add-product-button:hover {
+    background-color: #218838;
+}
+
+.logout a {
+    background-color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    margin-left: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.logout a:hover {
+    color: #666;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.product_title }} Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .product-info {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>{{ product.product_title }} Details</h1>
+    </header>
+
+    <main>
+        {% if product %}
+            <div class="product-info">
+                <h2>Product Information</h2>
+                <p><strong>Product ID:</strong> {{ product.product_id }}</p>
+                <p><strong>Category:</strong> {{ product.category_name }}</p>
+                <p><strong>Title:</strong> {{ product.product_title }}</p>
+                <p><strong>Price:</strong> ${{ product.price }}</p>
+                <p><strong>Description:</strong> {{ product.product_description }}</p>
+            </div>
+
+            {% if product.features %}
+                <div class="product-features">
+                    <h2>Product Features</h2>
+                    <ul>
+                        {% for feature in product.features %}
+                            <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% else %}
+            <p>Product not found.</p>
+        {% endif %}
+    </main>
+
+</body>
+</html>

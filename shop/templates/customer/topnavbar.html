@@ -1,0 +1,67 @@
+<!-- topnavbar.html -->
+
+<div class="top-navbar" id="top-navbar">
+    <div class="company-name">hook</div>
+    <div class="search-bar">
+      <input id="searchQuery" placeholder="Search for products">
+      <button onclick="search()">Search</button>
+    </div>
+  </div>
+  
+  <script>
+    // JavaScript for TopNavbar logic
+    document.addEventListener('DOMContentLoaded', function () {
+      var searchQuery = '';
+  
+      function search() {
+        searchQuery = document.getElementById('searchQuery').value.toLowerCase();
+        navigateToResultPage();
+      }
+  
+      function navigateToResultPage() {
+        // Implement your navigation logic here
+        console.log('Navigating to result page with search query:', searchQuery);
+      }
+    });
+  </script>
+  
+  <style>
+    /* Add your CSS styling here */
+    .top-navbar {
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+    }
+  
+    .company-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+  
+    .search-bar input {
+      padding: 5px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+    }
+  
+    .search-bar button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  
+    .search-bar button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  

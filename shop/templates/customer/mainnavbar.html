@@ -1,0 +1,56 @@
+<!-- mainnavbar.html -->
+
+<div id="main-navbar-app">
+    <!-- Vue.js component markup -->
+    <nav class="navbar">
+      <div class="logo">Categories</div>
+      <div class="nav-links">
+        <div class="dropdown-wrapper">
+          <button @mouseover="showAllProductsDropdown = true">All Products</button>
+          <div v-if="showAllProductsDropdown" class="dropdown">
+            <button @click="navigate('Air Conditioner')">Air Conditioner</button>
+            <button @click="navigate('Home Appliances')">Home Appliances</button>
+            <button @click="navigate('Audio & Video')">Audio & Video</button>
+            <button @click="navigate('Refrigerator')">Refrigerator</button>
+            <button @click="navigate('New Arrivals')">New Arrivals</button>
+          </div>
+        </div>
+        <button @click="navigate('Todays Deals')">Todays Deals</button>
+        <button @click="navigate('Gift Cards')">Gift Cards</button>
+       
+        <a href="{{ url_for('shopping_cart') }}">
+            <button>
+                <i class="fas fa-shopping-cart"></i> Shopping Cart 
+            </button>
+        </a>
+        {% if is_login %}
+        <a href="{{ url_for('logout_customer') }}">
+            <button @click="navigate('Logout')">Logout</button>
+        </a>
+        {% else %}
+        <a href="{{ url_for('login_customer') }}">
+            <button @click="navigate('Log In')">Log In</button>
+        </a>
+        {% endif %}
+    
+      </div>
+    </nav>
+  
+    <script>
+      // Vue.js component logic
+      new Vue({
+        el: '#main-navbar-app',
+        data: {
+          showAllProductsDropdown: false,
+        },
+        methods: {
+          navigate(category) {
+            console.log(`Navigating to ${category}`);
+          },
+          showShoppingCardComponent() {
+            console.log('Show shopping cart component');
+          },
+        },
+      });
+    </script>
+  </div>

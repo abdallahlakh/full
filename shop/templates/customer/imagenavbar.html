@@ -1,0 +1,64 @@
+<!-- imagenavbar.html -->
+
+<div class="image-navbar">
+    <div class="image-logo">
+      <div class="flex-container">
+        <img src="/static/customer/images/home.jpg" alt="Home" style="display: flex; height: 672px; width: 100%;" />
+      </div>
+    </div>
+    <div class="announcement-container" id="announcement-container">
+        {% include 'customer/announcement.html' %}
+    </div>
+  </div>
+  
+  <script>
+    // JavaScript for ImageNavbar logic
+    document.addEventListener('DOMContentLoaded', function () {
+      // Create an Announcement component dynamically
+      var announcementContainer = document.getElementById('announcement-container');
+      var announcementComponent = document.createElement('div');
+      announcementComponent.innerHTML = '<!-- Add your Announcement component HTML here -->';
+      announcementContainer.appendChild(announcementComponent);
+    });
+  </script>
+  
+  <style>
+    /* Add your CSS styling here */
+    .image-navbar {
+      background-color: hsl(0, 0%, 13%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 672px;
+      width: 100%;
+      position: relative;
+      top: -1ch;
+    }
+  
+    /* Center the Announcement component */
+    .announcement-container {
+      position: absolute;
+      top: 50%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px 0;
+      width: 400px;
+      height: 400px;
+      border-radius: 5px;
+      z-index: 1;
+    }
+  
+    /* Media query for medium screens (adjust as needed) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .image-logo {
+        text-align: center;
+      }
+      .announcement-container {
+        width: 100%;
+        height: auto;
+        left: 50%;
+      }
+    }
+  </style>
+  

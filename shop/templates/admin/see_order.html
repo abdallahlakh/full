@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Details</h1>
+
+    <h2>Order Information</h2>
+    <form>
+        {{ order_form.hidden_tag() }}
+        <p><label for="customer_id"><strong>Customer ID:</strong></label> {{ order_form.customer_id.data }}</p>
+        <p><label for="order_date"><strong>Order Date:</strong></label> {{ order_form.order_date.data }}</p>
+        <p><label for="total_amount"><strong>Total Amount:</strong></label> {{ order_form.total_amount.data }}</p>
+        <p><label for="order_status"><strong>Order Status:</strong></label> {{ order_form.order_status.data}}</p>
+        <p><label for="payment_method"><strong>Payment Method:</strong></label> {{ order_form.payment_method.data }}</p>
+    </form>
+
+    <h2>Order Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Price per Unit</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail_form in order_detail_forms %}
+                <tr>
+                    <td><label for="product_id"><strong>{{ detail_form.product_id.label }}</strong></label> {{ detail_form.product_id.data}}</td>
+                    <td><label for="quantity"><strong>{{ detail_form.quantity.label }}</strong></label> {{ detail_form.quantity.data }}</td>
+                    <td><label for="price_per_unit"><strong>{{ detail_form.price_per_unit.label }}</strong></label> {{ detail_form.price_per_unit.data}}</td>
+                    <td><label for="subtotal"><strong>{{ detail_form.subtotal.label }}</strong></label> {{ detail_form.subtotal.data}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Add any additional content or styling as needed -->
+
+</body>
+</html>

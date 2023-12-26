@@ -1,0 +1,92 @@
+CREATE TABLE `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `email` varchar(120) NOT NULL,
+  `image_file` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `password` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `customers` (
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) DEFAULT NULL,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `registration_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_login` timestamp NULL DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `orders` (
+  `OrderID` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int DEFAULT NULL,
+  `order_date` datetime NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `order_status` varchar(50) NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  PRIMARY KEY (`OrderID`),
+  KEY `orders_ibfk_1` (`customer_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `product_category` (
+  `category_id` int NOT NULL,
+  `category_name` varchar(255) NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `product` (
+  `product_id` int NOT NULL AUTO_INCREMENT,
+  `category_id` int DEFAULT NULL,
+  `product_title` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `product_description` text,
+  `image_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `product_ibfk_1` (`category_id`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`category_id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `order_details` (
+  `order_detail_id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price_per_unit` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL,
+  `order_id` int DEFAULT NULL,
+  PRIMARY KEY (`order_detail_id`) USING BTREE,
+  KEY `order_details_ibfk_2` (`product_id`),
+  KEY `fk_order_id` (`order_id`),
+  CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`OrderID`),
+  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `product_features` (
+  `feature_id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int DEFAULT NULL,
+  `feature_description` text,
+  PRIMARY KEY (`feature_id`),
+  KEY `product_features_ibfk_1` (`product_id`),
+  CONSTRAINT `product_features_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `shopping_cart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int DEFAULT '1',
+  `price` decimal(10,2) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` varchar(255) DEFAULT 'active',
+  PRIMARY KEY (`cart_id`),
+  KEY `product_id` (`product_id`),
+  KEY `shopping_cart_ibfk_1` (`customer_id`),
+  CONSTRAINT `shopping_cart_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `shopping_cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

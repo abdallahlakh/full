@@ -1,0 +1,74 @@
+<!-- productgallery.html -->
+
+<div class="product-gallery" id="product-gallery">
+    <div class="product-container">
+        {% for productData in productGalleryData %}
+            <div class="product-item" onclick="handleProductClick('{{ productData[0] }}')">
+                <a href="{{url_for('product_category', category=productData[0])}}">
+                    <img src="{{ productData[1] }}" alt="{{ productData[0] }}" class="product-image" />
+                    <div class="product-details">
+                        <div class="product-title">{{ productData[0] }}</div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    // JavaScript for ProductGallery logic
+    document.addEventListener('DOMContentLoaded', function () {
+        function handleProductClick(category) {
+            console.log(`Clicked on category: ${category}`);
+            
+            // Redirect to the corresponding product template
+            window.location.href = `/customer/products/${category.toLowerCase()}.html`;
+        }
+    });
+</script>
+
+<style>
+    .product-gallery {
+        margin: 20px;
+    }
+
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .product-item {
+        width: 200px;
+        margin: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .product-item:hover {
+        transform: scale(1.05);
+    }
+
+    .product-image {
+        max-width: 120%;
+        height: 150px; /* Set a fixed height for the images */
+        object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+        border-bottom: 1px solid #ddd;
+    }
+
+    .product-details {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .product-title {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .product-price {
+        font-size: 14px;
+        color: #888;
+    }
+</style>

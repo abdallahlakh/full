@@ -1,0 +1,53 @@
+-- Insert data into the customers table if not exists
+INSERT IGNORE INTO `customers` (`email`, `password_hash`, `first_name`, `last_name`) VALUES
+('customer1@example.com', 'hash1', 'John', 'Doe'),
+('customer2@example.com', 'hash2', 'Jane', 'Doe'),
+('customer7@example.com', 'hash7', 'Alex', 'Johnson'),
+('customer8@example.com', 'hash8', 'Sophia', 'Miller');
+
+-- Insert data into the admin table if not exists
+INSERT IGNORE INTO `admin` (`username`, `email`, `image_file`, `password`) VALUES
+('admin1', 'admin1@example.com', 'admin1.jpg', 'admin1password');
+
+-- Insert data into the orders table if not exists
+INSERT IGNORE INTO `orders` (`customer_id`, `order_date`, `total_amount`, `order_status`, `payment_method`) VALUES
+(1, '2023-01-01 12:00:00', 100.00, 'Completed', 'Credit Card'),
+(2, '2023-01-02 14:30:00', 75.50, 'Processing', 'PayPal'),
+(7, '2023-01-07 15:00:00', 120.25, 'Processing', 'Credit Card'),
+(8, '2023-01-08 11:20:00', 90.75, 'Pending', 'PayPal');
+
+-- Insert data into the product_category table if not exists
+INSERT IGNORE INTO `product_category` (`category_id`, `category_name`, `image_url`) VALUES
+(1, 'Electronics', 'electronics.jpg'),
+(2, 'Clothing', 'clothing.jpg');
+
+-- Insert data into the product table if not exists
+INSERT IGNORE INTO `product` (`category_id`, `product_title`, `price`, `product_description`, `image_url`) VALUES
+(1, 'Laptop', 899.99, 'Powerful laptop with high-performance features.', 'laptop.jpg'),
+(2, 'T-Shirt', 19.99, 'Comfortable cotton T-shirt.', 'tshirt.jpg'),
+(5, 'Tablet', 349.99, 'Lightweight tablet for on-the-go use.', 'tablet.jpg'),
+(6, 'Jeans', 29.99, 'Classic denim jeans for everyday wear.', 'jeans.jpg');
+
+-- Insert data into the order_details table if not exists
+INSERT IGNORE INTO `order_details` (`product_id`, `quantity`, `price_per_unit`, `subtotal`, `order_id`) VALUES
+(1, 2, 899.99, 1799.98, 1),
+(2, 3, 19.99, 59.97, 1),
+(1, 1, 899.99, 899.99, 2),
+(7, 2, 349.99, 699.98, 7),
+(8, 4, 29.99, 119.96, 8),
+(3, 1, 29.99, 29.99, 8);
+
+-- Insert data into the product_features table if not exists
+INSERT IGNORE INTO `product_features` (`product_id`, `feature_description`) VALUES
+(1, '15-inch display, 16GB RAM, 1TB SSD'),
+(2, '100% cotton, available in multiple colors'),
+(5, '10-inch display, 64GB storage, quad-core processor'),
+(6, '100% cotton, available in various colors');
+
+-- Insert data into the shopping_cart table if not exists
+INSERT IGNORE INTO `shopping_cart` (`customer_id`, `product_id`, `quantity`, `price`, `status`) VALUES
+(1, 1, 2, 899.99, 'active'),
+(2, 2, 3, 19.99, 'active'),
+(6, 6, 2, 29.99, 'active'),
+(7, 7, 3, 349.99, 'active'),
+(8, 8, 1, 29.99, 'active');

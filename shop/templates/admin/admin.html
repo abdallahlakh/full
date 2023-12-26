@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="static/admin/adminstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="admin-panel">
+        <div class="sidebar">
+            <div class="admin-info">
+                <img src="static/admin/images/1.jpeg" alt="Admin Avatar">
+                <p>Welcome, <strong>oussama</strong></p>
+            </div>
+
+            <ul>
+                <li><a href="#dashboard" onclick="showView('dashboard')">Dashboard</a></li>
+                <li><a href="#products" onclick="showView('products')">Products</a></li>
+                <li><a href="#orders" onclick="showView('orders')">Orders</a></li>
+                <li><a href="#customers" onclick="showView('customers')">Customers</a></li>
+            </ul>
+            
+            <div class="logout">
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
+
+        </div>
+
+        <div class="content">
+            <!-- Content of the admin panel goes here -->
+            <div id="dashboardView" class="view">
+                <h1>Dashboard:</h1>
+                <div>
+                    <div class="search-view">
+                        <input type="text" placeholder="Search...">
+                        <button type="button">Search</button>
+                    </div>
+                    <h1 >recent Customers</h1>
+    
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for customer in recent_customers %}
+                                <tr>
+                                    <td>{{ customer.customer_id }}</td>
+                                    <td>{{ customer.first_name }}</td>
+                                    <td>{{ customer.last_name }}</td>
+                                    <td>
+                                        <a href="{{ url_for('see_customer', customer_id=customer.customer_id) }}">
+                                            <button class="icon-button details">
+                                                <i class="fas fa-info-circle"></i> See Details
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h1>recent Orders</h1>
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer ID</th>
+                                <th>Order Date</th>
+                                <th>Total Amount</th>
+                                <th>Order Status</th>
+                                <th>Payment Method</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in recent_orders %}
+                                <tr>
+                                    <td>{{ order.OrderID }}</td>
+                                    <td>{{ order.customer_id }}</td>
+                                    <td>{{ order.order_date }}</td>
+                                    <td>${{ order.total_amount }}</td>
+                                    <td>{{ order.order_status }}</td>
+                                    <td>{{ order.payment_method }}</td>
+                                    <td>
+                                        <a href="{{ url_for('edit_order', order_id=order.OrderID) }}">
+                                            <button class="icon-button edit">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                        </a>
+                
+                                        <a href="{{ url_for('delete_order', order_id=order.OrderID) }}">
+                                            <button class="icon-button delete">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </button>
+                                        </a>
+                
+                                        <a href="{{ url_for('see_order', order_id=order.OrderID) }}">
+                                            <button class="icon-button details">
+                                                <i class="fas fa-info-circle"></i> See Details
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- Add dashboard content here -->
+            </div>
+
+            <div id="productsView" class="view">
+                <h1>Products View</h1>
+                <a class="add-product-button" href="{{ url_for('add_product') }}">
+                    <i class="fas fa-plus"></i> Add Product
+                </a>
+
+                <div class="search-view">
+                    <input type="text" placeholder="Search...">
+                    <button type="button">Search</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.product_title }}</td>
+                                <td>{{ product.category_id.category_name }}</td>
+                                <td>${{ product.price }}</td>
+                                <td>{{ product.product_description }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit_product', product_id=product.product_id) }}">
+                                        <button class="icon-button edit">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                    </a>
+
+                                    <a href="{{ url_for('delete_product', product_id=product.product_id) }}">
+                                        <button class="icon-button delete">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </a>
+
+                                    <a href="{{ url_for('see_product', product_id=product.product_id) }}">
+                                        <button class="icon-button details">
+                                            <i class="fas fa-info-circle"></i> See Details
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+          <!-- ... (other HTML code) ... -->
+
+            <div id="ordersView" class="view">
+                <h1>Orders View</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer ID</th>
+                            <th>Order Date</th>
+                            <th>Total Amount</th>
+                            <th>Order Status</th>
+                            <th>Payment Method</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.OrderID }}</td>
+                                <td>{{ order.customer_id }}</td>
+                                <td>{{ order.order_date }}</td>
+                                <td>${{ order.total_amount }}</td>
+                                <td>{{ order.order_status }}</td>
+                                <td>{{ order.payment_method }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit_order', order_id=order.OrderID) }}">
+                                        <button class="icon-button edit">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                    </a>
+            
+                                    <a href="{{ url_for('delete_order', order_id=order.OrderID) }}">
+                                        <button class="icon-button delete">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </a>
+            
+                                    <a href="{{ url_for('see_order', order_id=order.OrderID) }}">
+                                        <button class="icon-button details">
+                                            <i class="fas fa-info-circle"></i> See Details
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            
+            <div id="customersView" class="view">
+                <h1>Customers View</h1>
+                <div class="search-view">
+                    <input type="text" placeholder="Search...">
+                    <button type="button">Search</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Registration Date</th>
+                            <th>Last Login</th>
+                            <th>Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                            <tr>
+                                <td>{{ customer.customer_id }}</td>
+                                <td>{{ customer.email }}</td>
+                                <td>{{ customer.first_name }}</td>
+                                <td>{{ customer.last_name }}</td>
+                                <td>{{ customer.registration_date }}</td>
+                                <td>{{ customer.last_login }}</td>
+                                <td>{{ 'Yes' if customer.is_active else 'No' }}</td>
+                                <td>
+                                    <a href="{{ url_for('edit_customer', customer_id=customer.customer_id) }}">
+                                        <button class="icon-button edit">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                    </a>
+                                    <a href="{{ url_for('delete_customer', customer_id=customer.customer_id) }}">
+                                        <button class="icon-button delete">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </a>
+                                    <a href="{{ url_for('see_customer', customer_id=customer.customer_id) }}">
+                                        <button class="icon-button details">
+                                            <i class="fas fa-info-circle"></i> See Details
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set the default view to 'dashboard'
+        var currentView = 'dashboard';
+
+        function showView(viewName) {
+            // Hide all views
+            var views = document.getElementsByClassName('view');
+            for (var i = 0; i < views.length; i++) {
+                views[i].style.display = 'none';
+            }
+
+            // Show the selected view
+            document.getElementById(viewName + 'View').style.display = 'block';
+
+            // Update the current view
+            currentView = viewName;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var searchView = document.querySelector(".search-view");
+            var searchViewOffsetTop = searchView.offsetTop;
+
+            window.addEventListener("scroll", function () {
+                if (window.pageYOffset >= searchViewOffsetTop) {
+                    searchView.classList.add("sticky");
+                } else {
+                    searchView.classList.remove("sticky");
+                }
+            });
+        });
+
+        
+    // Set the default view to 'dashboard'
+    var currentView = 'dashboard';
+
+    function showView(viewName) {
+        // Hide all views
+        var views = document.getElementsByClassName('view');
+        for (var i = 0; i < views.length; i++) {
+            views[i].style.display = 'none';
+        }
+
+        // Show the selected view
+        document.getElementById(viewName + 'View').style.display = 'block';
+
+        // Update the current view
+        currentView = viewName;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var searchView = document.querySelector(".search-view");
+        var searchViewOffsetTop = searchView.offsetTop;
+
+        window.addEventListener("scroll", function () {
+            if (window.pageYOffset >= searchViewOffsetTop) {
+                searchView.classList.add("sticky");
+            } else {
+                searchView.classList.remove("sticky");
+            }
+        });
+
+        // Check if there's a hash in the URL and show the corresponding view
+        if (window.location.hash) {
+            var hash = window.location.hash.slice(1); // Remove the '#' character
+            showView(hash);
+        } else {
+            // If no hash is present, show the default view
+            showView(currentView);
+        }
+    });
+    </script>
+
+</body>
+
+</html>
